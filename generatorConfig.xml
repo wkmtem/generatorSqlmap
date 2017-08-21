@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+ 
+<generatorConfiguration>
+	<context id="testTables" targetRuntime="MyBatis3">
+		<!-- 抑制警告 -->
+		<!-- <property name="suppressTypeWarnings" value="true" /> -->
+		<!-- 生成serialVersionUID(javaBean、javaBeanExample) -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" /> 
+		<!-- 生成hashcode和equals方法 -->
+		<!-- <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" /> -->
+		<!-- 这个插件只会增加字符串字段映射到一个JDBC字符的方法 -->
+	    <!-- <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" /> -->
+        <!-- 生成toString -->
+        <!-- <plugin type="org.mybatis.generator.plugins.ToStringPlugin" /> -->
+        
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<!--Mysql-->
+		<!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://139.196.195.162:3306/cms"
+			userId="root"
+			password="zjwlJX20160528">
+		</jdbcConnection> -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://rm-uf6h02b6qu44p4317o.mysql.rds.aliyuncs.com/examination_test"
+			userId="tlj"
+			password="Tlj20170322@">
+		</jdbcConnection>
+		<!--Oracle-->
+		<!-- <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg" 
+			userId="yycg"
+			password="yycg">
+		</jdbcConnection> -->
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
+			NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- targetProject:生成PO类javaBean的位置 -->
+		<javaModelGenerator targetPackage="com.compass.examination.pojo.po" targetProject=".\src">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+        <!-- targetProject:mapper映射xml文件生成的位置 -->
+		<sqlMapGenerator targetPackage="com.compass.examination.core.dao.mapper" targetProject=".\src">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		
+		<!-- targetPackage：mapper接口java文件生成的位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.compass.examination.core.dao.mapper" targetProject=".\src">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		
+		<!-- 指定数据库表(多个) schema:用于Oralce控制用户(Oralce中一个用户对应一个schema)-->
+		<table schema="" tableName="tenant">
+			<generatedKey column="id" sqlStatement="JDBC"/><!-- This value will only produce valid code when the target runtime is MyBatis3 -->
+		</table>
+		<!-- <table schema="" tableName="user">
+			<generatedKey column="id" sqlStatement="JDBC"/>
+		</table> --> 
+		<table schema="" tableName="email_validation">
+			<generatedKey column="id" sqlStatement="JDBC"/>
+		</table>
+
+		
+		<!-- 有些表的字段需要指定java类型
+		 <table schema="" tableName="">
+			<columnOverride column="" javaType="Integer" />
+		</table> -->
+	</context>
+</generatorConfiguration>
